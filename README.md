@@ -16,7 +16,12 @@ I containerized everything with Docker so that setup is easy.
 ## Requirements
 
 - Docker and Docker Compose
+
+I ended up downloading the Docker desktop application, which makes it very easy to visualize and control your containers.
+<https://www.docker.com/products/docker-desktop/>
+
 - A Spotify Developer account (which is free)
+<https://developer.spotify.com/dashboard>
 
 ## Getting Started
 
