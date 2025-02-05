@@ -1,4 +1,4 @@
-# Spotify Top Tracks Pipeline
+# Spotify Top Tracks Data Pipeline
 
 A containerized data pipeline that automatically fetches your Spotify listening history and visualizes it through a Streamlit dashboard. The pipeline uses Airflow for orchestration, PostgreSQL for data storage, and Docker for containerization.
 
