@@ -1,0 +1,20 @@
+# Use an official Python image
+FROM python:3.9-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY dashboard_requirements.txt /app/
+
+# Install the dependencies
+RUN pip install --no-cache-dir -r dashboard_requirements.txt
+
+# Copy the Streamlit app to the container
+COPY ./spotify_dashboard.py /app/
+
+# Expose the port Streamlit will run on
+EXPOSE 8501
+
+# Command to run Streamlit when the container starts
+CMD ["streamlit", "run", "spotify_dashboard.py", "--server.port=8501", "--server.address=0.0.0.0"]

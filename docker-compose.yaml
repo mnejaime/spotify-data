@@ -1,0 +1,48 @@
+services:
+  postgres:
+    env_file:
+      - .env
+    image: postgres
+    container_name: SpotifyPostgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PW}
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  airflow:
+    build: .
+    container_name: airflow
+    restart: always
+    env_file: .env
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${DB_USER}:${DB_PW}@postgres/${DB_NAME}
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts  # Mount scripts
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    command: >
+      bash -c "airflow db init &&
+               airflow webserver & 
+               airflow scheduler"
+
+  streamlit:
+    build: ./dashboard
+    container_name: streamlit_app
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    restart: always
+
+volumes:
+  postgres_data:
