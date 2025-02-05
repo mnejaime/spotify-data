@@ -1,52 +1,48 @@
 # Spotify Top Tracks Data Pipeline
 
-A containerized data pipeline that automatically fetches your Spotify listening history and visualizes it through a Streamlit dashboard. The pipeline uses Airflow for orchestration, PostgreSQL for data storage, and Docker for containerization.
+Figured a fun way to learn about some data science tools would be to look into my music listening habits!
 
-## Project Overview
+This tool automates the collection of Spotify data and shows it in a dashboard.
 
-This project consists of three main components:
+## What It Does
 
-1. An ETL pipeline that fetches top tracks data from Spotify's API
-2. An Apache Airflow workflow that automates the data collection process
-3. A Streamlit dashboard that visualizes your listening habits
+The pipeline does two main things:
 
-## Prerequisites
+- Automatically pulls your top tracks from Spotify's API and stores them in a PostgreSQL database using Airflow
+- Shows your listening trends in a Streamlit dashboard that updates itself
+
+I containerized everything with Docker so that setup is easy.
+
+## Requirements
 
 - Docker and Docker Compose
-- Spotify Developer Account (for API credentials)
-- Python 3.x
+- A Spotify Developer account (which is free)
 
-## Setup Instructions
+## Getting Started
 
-1. **Environment Variables**
-
-Create a `.env` file in the root directory with the following variables:
+Create a `.env` file with your credentials. It should look like this:
 
 ```.env
-# Database Configuration
+# Database Credentials
 DB_USER=your_username
 DB_PW=your_password
 DB_HOST=postgres
 DB_PORT=5432
 DB_NAME=mydb
 
-# Spotify API Credentials
+# Your Spotify API credentials
 SPOTIPY_CLIENT_ID=your_spotify_client_id
 SPOTIPY_CLIENT_SECRET=your_spotify_client_secret
 SPOTIPY_REDIRECT_URI=your_redirect_uri
 ```
 
-2. **Start the Services**
+I set my redirect URL to `http://localhost:1234/`
+
+Then run:
 
 ```bash
 docker-compose up --build
 ```
-
-This will start:
-
-- PostgreSQL database (port 5432)
-- Airflow webserver (port 8080)
-- Streamlit dashboard (port 8501)
 
 ## Component Details
 
@@ -96,27 +92,26 @@ This will start:
 
 ## Usage
 
-1. Access Airflow UI at `http://localhost:8080` to monitor pipeline runs
-2. View your Spotify insights at `http://localhost:8501`
-3. Data automatically refreshes daily through the Airflow pipeline
+1. Go to `http://localhost:8080` to monitor the data pipeline
+2. Look at your spotify metrics at `http://localhost:8501`
 
-## Development
-
-To modify the pipeline:
-
-1. Update ETL logic in `scripts/spotify_etl.py`
-2. Modify dashboard visualizations in `dashboard/spotify_dashboard.py`
-3. Adjust DAG schedule in `dags/airflow_dag.py`
+The data refreshes daily as long as the containers are running, but you can also trigger a manual refresh through Airflow.
 
 ## Troubleshooting
 
-- Ensure all containers are running: `docker-compose ps`
-- Check Airflow logs for pipeline issues
-- Verify database connection through the Streamlit dashboard
-- Ensure Spotify API credentials are correctly configured
+- Run `docker-compose ps` to make sure all containers are actually running
+- Check Airflow logs
+- Ensure database connection through streamlit dashboard
+- Check Spotify API credentials if you're not getting any data
 
 ## Notes
 
+<<<<<<< HEAD
 - The pipeline uses Spotify's "user-top-read" scope
 - Data is replaced daily to maintain current listening trends
 - Dashboard updates automatically when new data is available
+=======
+- The pipeline uses Spotify's "user-top-read" permission
+- It replaces the data daily instead of appending (does not track history)
+- The dashboard updates itself when new data comes in, so no need to refresh manually
+>>>>>>> 9de1a41 (update README.md)
