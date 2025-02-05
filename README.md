@@ -49,13 +49,13 @@ docker-compose up --build
 ### Database
 
 - PostgreSQL database storing top tracks information
-- Automatically initialized with required tables
+- Automatically initialized with needed tables
 - Data persisted using Docker volumes
 
 ### ETL Pipeline
 
 - Located in `scripts/spotify_etl.py`
-- Fetches top 50 tracks from authenticated user's Spotify account
+- Fetches top 50 tracks from your Spotify account
 - Processes and stores track and artist information
 
 ### Airflow DAG
@@ -106,12 +106,6 @@ The data refreshes daily as long as the containers are running, but you can also
 
 ## Notes
 
-<<<<<<< HEAD
 - The pipeline uses Spotify's "user-top-read" scope
 - Data is replaced daily to maintain current listening trends
 - Dashboard updates automatically when new data is available
-=======
-- The pipeline uses Spotify's "user-top-read" permission
-- It replaces the data daily instead of appending (does not track history)
-- The dashboard updates itself when new data comes in, so no need to refresh manually
->>>>>>> 9de1a41 (update README.md)
