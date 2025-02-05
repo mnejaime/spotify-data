@@ -23,8 +23,8 @@ engine = create_engine(db_url) # sqlalchemy creates a connection to the db
 df = pd.read_sql("SELECT * FROM top_spotify_tracks", engine)
 
 # title and description
-st.title("🎵 My Spotify Listening Analysis")
-st.markdown("A look into my music preferences based on top tracks.")
+st.title("Spotify Listening Analysis")
+st.markdown("A look into music preferences based on top tracks.")
 
 # make a few columns for metrics
 col1, col2, col3 = st.columns(3)
@@ -39,17 +39,15 @@ with col3:
     top_artist = df['artist'].mode()[0]
     st.metric("Most Featured Artist", top_artist)
 
+artist_counts = df['artist'].value_counts().reset_index()
+artist_counts.columns = ['Artist', 'Count']
+
 # top artists
 st.subheader("🎸 Top Artists Distribution")
-fig_artists = px.bar(
-    df['artist'].value_counts().reset_index(),
-    x='artist',
-    y='count',
-    title="Number of Tracks per Artist",
-    labels={'count': 'Number of Tracks', 'artist': 'Artist'},
+st.dataframe(
+    artist_counts,
+    use_container_width=True
 )
-fig_artists.update_layout(showlegend=False)
-st.plotly_chart(fig_artists, use_container_width=True)
 
 # track list
 st.subheader("📝 Detailed Track List")
