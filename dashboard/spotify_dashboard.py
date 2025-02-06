@@ -3,8 +3,6 @@ import pandas as pd
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import os
-import plotly.express as px
-import plotly.graph_objects as go
 
 load_dotenv('.env') # load our .env file
 
