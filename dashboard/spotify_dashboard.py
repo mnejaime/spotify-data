@@ -43,14 +43,14 @@ artist_counts = df['artist'].value_counts().reset_index()
 artist_counts.columns = ['Artist', 'Count']
 
 # top artists
-st.subheader("🎸 Top Artists Distribution")
+st.subheader("🎸 Top Artists")
 st.dataframe(
     artist_counts,
     use_container_width=True
 )
 
 # track list
-st.subheader("📝 Detailed Track List")
+st.subheader("📝 Track List")
 st.dataframe(
     df,
     column_config={
