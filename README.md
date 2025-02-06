@@ -2,7 +2,7 @@
 
 Figured a fun way to learn about some data science tools would be to look into my music listening habits!
 
-This tool automates the collection of Spotify data and shows it in a dashboard.
+This tool automates the collection of Spotify data and shows it in a dashboard. The goal of this project is not completeness of the dashboard, but for me to learn how to integrate the necessary technologies to make it work. Future enhancements include getting more data from the Spotify API and making real insights on the streamlit dashboard!
 
 ## What It Does
 
