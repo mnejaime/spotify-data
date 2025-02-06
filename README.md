@@ -73,8 +73,7 @@ docker-compose up --build
 ### Dashboard
 
 - Built with Streamlit
-- Displays top artists bar chart
-- Shows complete list of top tracks
+- Displays top artists and list of top tracks
 - Accessible at `http://localhost:8501`
 
 ## Project Structure
